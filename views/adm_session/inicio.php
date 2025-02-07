@@ -79,6 +79,8 @@
                                     value="productos" name="btn_action_next">Alta</button><br>
                         </div>
 
+                        <input type="hidden" name="latitud" id="latitud" >
+                        <input type="hidden" name="longitud" id="longitud" >
 
                     </form>
                 </div>
