@@ -1,4 +1,4 @@
-<?php /** @var \gamboamartin\cat_sat\controllers\controlador_cat_sat_clase_producto $controlador  controlador en ejecucion */ ?>
+<?php /** @var gamboamartin\contrato\controllers\controlador_adm_session $controlador  controlador en ejecucion */ ?>
 <?php use config\views; ?>
 <main class="main section-color-primary">
     <div class="container">
@@ -18,9 +18,7 @@
                                 <select class="form-control selectpicker color-secondary folio" data-live-search="true"
                                         id="folio" name="folio" required tabindex="-98">
                                     <option value="">Selecciona un folio</option>
-                                    <option value="4">FOLIO 1</option>
-                                    <option value="5">FOLIO 1</option>
-                                    <option value="6">FOLIO 1</option>
+                                    <?php echo $controlador->options_folio; ?>
                                 </select>
                             </div>
                         </div>
