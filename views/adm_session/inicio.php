@@ -74,6 +74,14 @@
                             </div>
                         </div>
 
+
+                        <div class="control-group col-sm-12">
+                            <label class="control-label" for="fachada">Fachada</label>
+                            <div class="controls">
+                                <input type="file" name="fachada" value="" class="form-control" required="" id="fachada">
+                            </div>
+                        </div>
+
                         <div class="control-group">
                             <button type="submit" class="btn btn-success alta_bd" style="width: 100%;"
                                     value="productos" name="btn_action_next">Alta</button><br>

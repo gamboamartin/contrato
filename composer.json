@@ -55,6 +55,7 @@
         "gamboa.martin/template_1": "^25.0.0",
         "gamboa.martin/system": "^24.0.0",
         "gamboa.martin/js_base": "^5.0.0",
+        "gamboa.martin/documento": "^24.0.0",
       "phpunit/phpunit": "^10.0.0"
     },
     "require-dev": {
