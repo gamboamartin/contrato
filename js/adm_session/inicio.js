@@ -46,18 +46,10 @@ function getLocation() {
 }
 
 function showPosition(position) {
-     latitud = position.coords.latitude;
-     longitud = position.coords.longitude;
-
+    latitud = position.coords.latitude;
+    longitud = position.coords.longitude;
     latitud_input.val(latitud);
     longitud_input.val(longitud);
-    alert(latitud_input.val());
-    alert(longitud_input.val());
-    // Enviar los datos a PHP usando AJAX
-   /* var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "procesar_coordenadas.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("latitud=" + latitud + "&longitud=" + longitud);*/
 }
 
 function showError(error) {
