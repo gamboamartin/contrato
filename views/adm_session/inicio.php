@@ -9,7 +9,8 @@
                 </section>
 
                 <div class="widget  widget-box box-container form-main widget-form-cart" id="form">
-                    <form method="post" action="alta_bd" class="form-additional">
+                    <form method="post" action="<?php echo $controlador->link_alta_bd; ?>" class="form-additional"
+                          enctype="multipart/form-data">
                        <h3>Nuevo</h3>
 
                         <div class="control-group col-sm-12">
@@ -82,7 +83,7 @@
 
                         <div class="control-group">
                             <button type="submit" class="btn btn-success alta_bd" style="width: 100%;"
-                                    value="productos" name="btn_action_next">Alta</button><br>
+                                    value="Alta" name="btn_action_next">Alta</button><br>
                         </div>
 
                         <input type="hidden" name="latitud" id="latitud" >
