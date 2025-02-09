@@ -44,11 +44,9 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
                 die('ERROR');
             }
         }
-        //print_r($result);exit;
 
-        print_r($_POST);
         $end_point = (new generales())->api_em3;
-        $end_point = $end_point."?method=alta_rapida_bd&debug=1&session_id=".$session_em3;
+        $end_point = $end_point."?method=alta_rapida_bd&session_id=".$session_em3;
 
         $params = array();
         $params['numero_empresa'] = 1;
@@ -84,19 +82,18 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         //print_r($params);exit;
 
         $alta = $this->make_post_request($end_point, $params,true);
+        if(isset($alta->error)){
+            if((int)$alta->error === 1){
+                $error = (new errores())->error('Error al insertar contrato',$alta);
+                print_r($error);
+                die('ERROR');
+            }
+        }
 
-        print_r($alta);exit;
-
-
-        print_r($_POST);
-        print_r($_FILES);exit;
-
-
-
-
-        exit;
-
-
+        if($header) {
+            header("Location: ./index.php?seccion=adm_session&accion=muestra_token&session_em3=$result->session_id&mensaje=Exito&tipo_mensaje=exito&session_id=" . (new generales())->session_id);
+            exit;
+        }
 
         return $result;
     }
