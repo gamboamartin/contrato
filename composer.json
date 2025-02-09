@@ -11,6 +11,7 @@
 
     "autoload": {
       "psr-4": {
+        "gamboamartin\\contrato\\src\\": "src",
         "gamboamartin\\contrato\\controllers\\": "controllers",
         "gamboamartin\\contrato\\models\\": "orm",
         "gamboamartin\\contrato\\instalacion\\": "instalacion",
