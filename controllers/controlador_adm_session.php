@@ -75,6 +75,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $params['GroupNum'] = -1;
         $params['periodicidad_pago_id'] = 2;
         $params['folio_con_fila_id'] = $_POST['folio'];
+        $params['Phone1'] = $_POST['telefono_1'];
 
         if((int)$session[0]->plaza_id === 29){
             $params['producto_id'] = 23;
