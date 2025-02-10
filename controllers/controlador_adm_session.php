@@ -28,6 +28,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
     public string $options_folio = '';
 
     public string $token_html = '';
+    public string $mensaje_cc = '';
 
     public function alta_rapida(bool $header = true, bool $ws = false)
     {
@@ -98,6 +99,15 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
                 die('ERROR');
             }
         }
+
+        if(isset($alta->envia_call_center)) {
+            if ($header) {
+                header("Location: ./index.php?seccion=adm_session&envia_call_center=1&accion=inicio&session_em3=$session_em3&session_id=" . (new generales())->session_id);
+                exit;
+            }
+        }
+
+
         $doc_documento_modelo = new doc_documento($this->link);
         $doc_tipo_documento_modelo = new doc_tipo_documento($this->link);
 
@@ -282,6 +292,14 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         }
 
         $this->registros = $contratos;
+
+        $mensaje_cc = '';
+        if(isset($_GET['envia_call_center'])){
+            $mensaje_cc = "<h1 class='h-side-title page-title page-title-big text-color-primary'>
+AFILIADO CON CONTRATO ANTERIOR APLICA REINCORPORACION, POR FAVOR MARQUE A CALL CENTER <a href='tel:4775820510'>4775820510</a></h1>";
+        }
+
+        $this->mensaje_cc = $mensaje_cc;
 
 
         return $template;

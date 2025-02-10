@@ -7,6 +7,7 @@
                 <section class="top-title">
                     <h1 class="h-side-title page-title page-title-big text-color-primary">Contratos</h1>
                     <?php echo $controlador->token_html; ?>
+                    <?php echo $controlador->mensaje_cc; ?>
                 </section>
 
                 <div class="widget  widget-box box-container form-main widget-form-cart" id="form">
