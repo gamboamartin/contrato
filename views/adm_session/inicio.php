@@ -6,6 +6,7 @@
             <div class="col-lg-12">
                 <section class="top-title">
                     <h1 class="h-side-title page-title page-title-big text-color-primary">Contratos</h1>
+                    <?php echo $controlador->token_html; ?>
                 </section>
 
                 <div class="widget  widget-box box-container form-main widget-form-cart" id="form">
@@ -90,6 +91,32 @@
                         <input type="hidden" name="longitud" id="longitud" >
 
                     </form>
+                </div>
+
+                <div class="col-md-12 table table-responsive">
+                    <h2>Mis Contratos</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Fachada
+                        </th>
+                        </thead>
+                        <tbody>
+                        <?php  foreach ($controlador->registros as $contrato){ ?>
+                        <tr>
+                            <td>
+                                <?php  echo $contrato->nombre_view; ?>
+                            </td>
+                            <td>
+                                <?php  echo $contrato->fachada; ?>
+                            </td>
+                        </tr>
+                        <?php  } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -9,8 +9,12 @@
 namespace gamboamartin\contrato\controllers;
 
 use config\generales;
+use finfo;
 use gamboamartin\administrador\models\adm_session;
+use gamboamartin\contrato\models\cont_prospecto;
 use gamboamartin\contrato\src\rfc;
+use gamboamartin\documento\models\doc_documento;
+use gamboamartin\documento\models\doc_tipo_documento;
 use gamboamartin\errores\errores;
 use gamboamartin\system\links_menu;
 use JsonException;
@@ -22,6 +26,8 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
     public string $mensaje_html = '';
 
     public string $options_folio = '';
+
+    public string $token_html = '';
 
     public function alta_rapida(bool $header = true, bool $ws = false)
     {
@@ -36,24 +42,25 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
 
         $params = array();
         $params['numero_empresa'] = 1;
-        $result = $this->make_post_request($end_point,$params);
-        if(isset($result->error)){
-            if((int)$result->error === 1){
-                $error = (new errores())->error('Error al obtener datos de session',$result);
+        $session = $this->make_post_request($end_point,$params);
+        if(isset($session->error)){
+            if((int)$session->error === 1){
+                $error = (new errores())->error('Error al obtener datos de session',$session);
                 print_r($error);
                 die('ERROR');
             }
         }
+
 
         $end_point = (new generales())->api_em3;
         $end_point = $end_point."?method=alta_rapida_bd&session_id=".$session_em3;
 
         $params = array();
         $params['numero_empresa'] = 1;
-        $params['plaza_id'] = $result[0]->plaza_id;
+        $params['plaza_id'] = $session[0]->plaza_id;
         $params['producto_id'] = 22;
-        $params['ohem_id'] = $result[0]->ohem_id;;
-        $params['empleado_id'] = $result[0]->empleado_id;;
+        $params['ohem_id'] = $session[0]->ohem_id;;
+        $params['empleado_id'] = $session[0]->empleado_id;;
         $params['U_CondPago'] = 'S';
         $params['U_FeNac'] = $_POST['fecha_nacimiento'];
         $params['nombre'] = $_POST['nombre'];
@@ -61,7 +68,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $params['apellido_m'] = $_POST['apellido_materno'];
         $params['CardName'] = $params['nombre'].' '.$params['apellido_p'].' '.$params['apellido_m'];
         $params['CardFName'] = $params['nombre'].' '.$params['apellido_p'].' '.$params['apellido_m'];
-        $params['SlpCode'] = $result[0]->ohem_salesPerson;
+        $params['SlpCode'] = $session[0]->ohem_salesPerson;
         $params['IndustryC'] = -1;
         $params['Cellular'] = $_POST['celular'];
         $params['CmpPrivate'] = 1;
@@ -69,7 +76,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $params['periodicidad_pago_id'] = 2;
         $params['folio_con_fila_id'] = $_POST['folio'];
 
-        if((int)$result[0]->plaza_id === 29){
+        if((int)$session[0]->plaza_id === 29){
             $params['producto_id'] = 23;
         }
 
@@ -81,6 +88,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $params['U_Beneficiario'] = $params['CardFName'];
         //print_r($params);exit;
 
+
         $alta = $this->make_post_request($end_point, $params,true);
         if(isset($alta->error)){
             if((int)$alta->error === 1){
@@ -89,14 +97,68 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
                 die('ERROR');
             }
         }
+        $doc_documento_modelo = new doc_documento($this->link);
+        $doc_tipo_documento_modelo = new doc_tipo_documento($this->link);
+
+        $filtro = array('doc_tipo_documento.descripcion'=>'FACHADA');
+
+        $r_tipo_doc = $doc_tipo_documento_modelo->filtro_and(filtro:$filtro);
+        if(errores::$error){
+            return $this->retorno_error(mensaje:  'Error al obtener tipo de doc',data: $r_tipo_doc, header: $header, ws: $ws);
+        }
+
+
+        $doc_documento = array();
+        $doc_documento['doc_tipo_documento_id'] = $r_tipo_doc->registros[0]['doc_tipo_documento_id'];
+
+
+        $extension = pathinfo($_FILES['fachada']['name'])['extension'];
+
+        $file = array();
+        $file['name'] = $alta->token.".".$extension;
+        $file['tmp_name'] = $_FILES['fachada']['tmp_name'];
+
+
+        $r_alta = $doc_documento_modelo->alta_documento($doc_documento,$file);
+        if(errores::$error){
+            return $this->retorno_error(mensaje:  'Error al guardar foto',data: $r_alta, header: $header, ws: $ws);
+        }
+        $doc_documento_id = $r_alta->registro_id;
+
+
+        $cont_prospecto_modelo = new cont_prospecto($this->link);
+
+
+        $cont_prospecto_alta = array();
+        $cont_prospecto_alta['descripcion'] = $_POST['nombre'].' '.$_POST['apellido_paterno'].' '.$_POST['apellido_materno'];
+        $cont_prospecto_alta['descripcion'] .= ".".$alta->token;
+        $cont_prospecto_alta['doc_documento_id'] = $doc_documento_id;
+        $cont_prospecto_alta['folio'] = $_POST['folio'];
+        $cont_prospecto_alta['nombre'] = $_POST['nombre'];
+        $cont_prospecto_alta['ap'] = $_POST['apellido_paterno'];
+        $cont_prospecto_alta['am'] = $_POST['apellido_materno'];
+        $cont_prospecto_alta['fecha_nac'] = $_POST['fecha_nacimiento'];
+        $cont_prospecto_alta['telefono'] = $_POST['telefono_1'];
+        $cont_prospecto_alta['celular'] = $_POST['celular'];
+        $cont_prospecto_alta['latitud'] = $_POST['latitud'];
+        $cont_prospecto_alta['longitud'] = $_POST['longitud'];
+        $cont_prospecto_alta['usuario_em3'] = $session[0]->usuario_id;
+        $cont_prospecto_alta['ohem'] = $session[0]->ohem_id;
+
+        $r_alta = $cont_prospecto_modelo->alta_registro($cont_prospecto_alta);
+        if(errores::$error){
+            return $this->retorno_error(mensaje:  'Error al guardar contrato',data: $r_alta, header: $header, ws: $ws);
+        }
 
         if($header) {
-            header("Location: ./index.php?seccion=adm_session&accion=muestra_token&session_em3=$result->session_id&mensaje=Exito&tipo_mensaje=exito&session_id=" . (new generales())->session_id);
+            header("Location: ./index.php?seccion=adm_session&token=$alta->token&accion=inicio&session_em3=$session_em3&mensaje=Exito&tipo_mensaje=exito&session_id=" . (new generales())->session_id);
             exit;
         }
 
-        return $result;
+
+        return $alta;
     }
+
 
 
 
@@ -114,7 +176,6 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         return array();
 
     }
-
 
     public function inicio(bool $aplica_template = false, bool $header = true, bool $ws = false): string|array
     {
@@ -138,7 +199,6 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
             }
         }
 
-        //print_r($result);
 
         $template =  parent::inicio($aplica_template, false); // TODO: Change the autogenerated stub
         if(errores::$error){
@@ -187,10 +247,40 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
             return $this->retorno_error(mensaje:  'Error al generar $link_alta_rapida',data: $link_alta_rapida, header: $header, ws: $ws);
         }
 
-
         $this->link_alta_bd = $link_alta_rapida;
 
+        $token_html = '';
+        if(isset($_GET['token'])){
+            $token_html = "<h1 class='h-side-title page-title page-title-big text-color-primary'>TOKEN: $_GET[token]</h1>";
+        }
+        $this->token_html = $token_html;
 
+
+        $cont_prospecto_modelo = new cont_prospecto($this->link);
+        $filtro['cont_prospecto.usuario_em3'] = $result[0]->usuario_id;
+
+        $r_mis_contratos = $cont_prospecto_modelo->filtro_and(filtro:$filtro,limit: 5,order: array('cont_prospecto.id'=>'DESC'));
+        if(errores::$error){
+            return $this->retorno_error(mensaje:  'Error al obtener contratos',data: $r_mis_contratos, header: $header, ws: $ws);
+        }
+
+        $contratos = $r_mis_contratos->registros;
+
+        $ruta_html = (new generales())->url_base;
+        foreach ($contratos as $index=>$contrato){
+            $contrato = (object)$contrato;
+
+            $link_foto = "<a href='$ruta_html$contrato->doc_documento_ruta_relativa' target='_blank'>Ver</a>";
+
+            $contratos[$index] = $contrato;
+            $contratos[$index]->nombre_view = $contrato->cont_prospecto_nombre.' '.$contrato->cont_prospecto_ap;
+            $contratos[$index]->fachada = $link_foto;
+
+
+
+        }
+
+        $this->registros = $contratos;
 
 
         return $template;
