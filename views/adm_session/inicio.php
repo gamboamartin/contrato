@@ -38,7 +38,8 @@
                             <label class="control-label" for="nombre">Apellido Paterno</label>
                             <div class="controls">
                                 <input type="text" name="apellido_paterno" value="" class="form-control" required
-                                       id="apellido_paterno" placeholder="Apellido Paterno" title="Apellido Paterno" pattern="^[a-zA-Z]+(\s?[a-zA-Z])*\s?$">
+                                       id="apellido_paterno" placeholder="Apellido Paterno" title="Apellido Paterno"
+                                       pattern="^[a-zA-Z]+(\s?[a-zA-Z])*\s?$">
                             </div>
                         </div>
 
@@ -46,7 +47,8 @@
                             <label class="control-label" for="nombre">Apellido Materno</label>
                             <div class="controls">
                                 <input type="text" name="apellido_materno" value="" class="form-control" required
-                                       id="apellido_materno" placeholder="Apellido Materno" title="Apellido Materno" pattern="^[a-zA-Z]+(\s?[a-zA-Z])*\s?$">
+                                       id="apellido_materno" placeholder="Apellido Materno" title="Apellido Materno"
+                                       pattern="^[a-zA-Z]+(\s?[a-zA-Z])*\s?$">
                             </div>
                         </div>
 
@@ -98,12 +100,14 @@
                     <h2>Mis Contratos</h2>
                     <table class="table table-striped">
                         <thead>
+                        <tr>
                         <th>
                             Nombre
                         </th>
                         <th>
                             Fachada
                         </th>
+                        </tr>
                         </thead>
                         <tbody>
                         <?php  foreach ($controlador->registros as $contrato){ ?>
