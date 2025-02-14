@@ -101,12 +101,9 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                        <th>
-                            Nombre
-                        </th>
-                        <th>
-                            Fachada
-                        </th>
+                            <th>Nombre</th>
+                            <th>Fachada</th>
+                            <th>TOKEN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -117,6 +114,9 @@
                             </td>
                             <td>
                                 <?php  echo $contrato->fachada; ?>
+                            </td>
+                            <td>
+                                <?php  echo $contrato->token; ?>
                             </td>
                         </tr>
                         <?php  } ?>

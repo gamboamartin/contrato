@@ -155,6 +155,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $cont_prospecto_alta['longitud'] = $_POST['longitud'];
         $cont_prospecto_alta['usuario_em3'] = $session[0]->usuario_id;
         $cont_prospecto_alta['ohem'] = $session[0]->ohem_id;
+        $cont_prospecto_alta['token'] = $alta->token;
 
         $r_alta = $cont_prospecto_modelo->alta_registro($cont_prospecto_alta);
         if(errores::$error){
@@ -302,6 +303,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
             $contratos[$index] = $contrato;
             $contratos[$index]->nombre_view = $contrato->cont_prospecto_nombre.' '.$contrato->cont_prospecto_ap;
             $contratos[$index]->fachada = $link_foto;
+            $contratos[$index]->token = $contrato->cont_prospecto_token;
 
         }
 
