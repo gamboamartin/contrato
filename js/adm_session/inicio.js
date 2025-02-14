@@ -17,6 +17,13 @@ txt_nombre.change(function () {
     nombre = $(this).val();
     nombre = nombre.toUpperCase();
     nombre = nombre.trim();
+    nombre = nombre.replace('Ñ', "N");
+    nombre = nombre.replace('Á', "A");
+    nombre = nombre.replace('É', "E");
+    nombre = nombre.replace('Í', "I");
+    nombre = nombre.replace('Ó', "O");
+    nombre = nombre.replace('Ó', "U");
+
     txt_nombre.val(nombre);
 });
 
@@ -24,6 +31,12 @@ txt_apellido_paterno.change(function () {
     apellido_paterno = $(this).val();
     apellido_paterno = apellido_paterno.toUpperCase();
     apellido_paterno = apellido_paterno.trim();
+    apellido_paterno = apellido_paterno.replace('Ñ', "N");
+    apellido_paterno = apellido_paterno.replace('Á', "A");
+    apellido_paterno = apellido_paterno.replace('É', "E");
+    apellido_paterno = apellido_paterno.replace('Í', "I");
+    apellido_paterno = apellido_paterno.replace('Ó', "O");
+    apellido_paterno = apellido_paterno.replace('Ó', "U");
     txt_apellido_paterno.val(apellido_paterno);
 });
 
@@ -31,6 +44,12 @@ txt_apellido_materno.change(function () {
     apellido_materno = $(this).val();
     apellido_materno = apellido_materno.toUpperCase();
     apellido_materno = apellido_materno.trim();
+    apellido_materno = apellido_materno.replace('Ñ', "N");
+    apellido_materno = apellido_materno.replace('Á', "A");
+    apellido_materno = apellido_materno.replace('É', "E");
+    apellido_materno = apellido_materno.replace('Í', "I");
+    apellido_materno = apellido_materno.replace('Ó', "O");
+    apellido_materno = apellido_materno.replace('Ó', "U");
     txt_apellido_materno.val(apellido_materno);
 });
 
