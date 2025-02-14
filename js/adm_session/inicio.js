@@ -22,7 +22,7 @@ txt_nombre.change(function () {
     nombre = nombre.replace('É', "E");
     nombre = nombre.replace('Í', "I");
     nombre = nombre.replace('Ó', "O");
-    nombre = nombre.replace('Ó', "U");
+    nombre = nombre.replace('Ú', "U");
 
     txt_nombre.val(nombre);
 });
@@ -36,7 +36,7 @@ txt_apellido_paterno.change(function () {
     apellido_paterno = apellido_paterno.replace('É', "E");
     apellido_paterno = apellido_paterno.replace('Í', "I");
     apellido_paterno = apellido_paterno.replace('Ó', "O");
-    apellido_paterno = apellido_paterno.replace('Ó', "U");
+    apellido_paterno = apellido_paterno.replace('Ú', "U");
     txt_apellido_paterno.val(apellido_paterno);
 });
 
@@ -49,7 +49,7 @@ txt_apellido_materno.change(function () {
     apellido_materno = apellido_materno.replace('É', "E");
     apellido_materno = apellido_materno.replace('Í', "I");
     apellido_materno = apellido_materno.replace('Ó', "O");
-    apellido_materno = apellido_materno.replace('Ó', "U");
+    apellido_materno = apellido_materno.replace('Ú', "U");
     txt_apellido_materno.val(apellido_materno);
 });
 
