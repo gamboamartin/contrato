@@ -132,78 +132,53 @@
 if(isset($_GET['camara'])){
 ?>
 
-<video id="video"></video>
-<button id="startbutton">Take photo</button>
-<canvas id="canvas"></canvas>
-<img src="http://placekitten.com/g/320/261" id="photo" alt="photo" />
+    <!—Aquí el video embebido de la webcam -->
+    <div class='video-wrap'>
+        <video id='video' playsinline autoplay></video>
+    </div>
+    <!—El elemento canvas -->
+    <div class='controller'>
+        <button id='snap'>Capture</button>
+    </div>
+    <!—Botón de captura -->
+    <canvas id='canvas' width='640' height='480'></canvas>
 
-<script>
-    (function () {
-        var streaming = false,
-            video = document.querySelector("#video"),
-            canvas = document.querySelector("#canvas"),
-            photo = document.querySelector("#photo"),
-            startbutton = document.querySelector("#startbutton"),
-            width = 320,
-            height = 0;
+    <script>
+        'use strict';
 
-        navigator.getMedia =
-            navigator.getUserMedia ||
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia ||
-            navigator.msGetUserMedia;
+        const video = document.getElementById('video');
+        const snap = document.getElementById('snap');
+        const canvas = document.getElementById('canvas');
+        const errorMsgElement = document.querySelector('span#errorMsg');
 
-        navigator.getMedia(
-            {
-                video: true,
-                audio: false,
-            },
-            function (stream) {
-                if (navigator.mozGetUserMedia) {
-                    video.mozSrcObject = stream;
-                } else {
-                    var vendorURL = window.URL || window.webkitURL;
-                    video.src = vendorURL.createObjectURL(stream);
-                }
-                video.play();
-            },
-            function (err) {
-                console.log("An error occured! " + err);
-            },
-        );
+        const constraints = {
+            audio: true,
+            video: {
+                width: 800, height: 600
+            }
+        };
 
-        video.addEventListener(
-            "canplay",
-            function (ev) {
-                if (!streaming) {
-                    height = video.videoHeight / (video.videoWidth / width);
-                    video.setAttribute("width", width);
-                    video.setAttribute("height", height);
-                    canvas.setAttribute("width", width);
-                    canvas.setAttribute("height", height);
-                    streaming = true;
-                }
-            },
-            false,
-        );
-
-        function takepicture() {
-            canvas.width = width;
-            canvas.height = height;
-            canvas.getContext("2d").drawImage(video, 0, 0, width, height);
-            var data = canvas.toDataURL("image/png");
-            photo.setAttribute("src", data);
+        // Acceso a la webcam
+        async function init() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                handleSuccess(stream);
+            } catch (e) {
+                errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+            }
         }
-
-        startbutton.addEventListener(
-            "click",
-            function (ev) {
-                takepicture();
-                ev.preventDefault();
-            },
-            false,
-        );
-    })();
+        // Correcto!
+        function handleSuccess(stream) {
+            window.stream = stream;
+            video.srcObject = stream;
+        }
+        // Load init
+        init();
+        // Dibuja la imagen
+        var context = canvas.getContext('2d');
+        snap.addEventListener('click', function() {
+            context.drawImage(video, 0, 0, 640, 480);
+        });
 
 </script>
 
