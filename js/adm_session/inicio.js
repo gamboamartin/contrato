@@ -13,6 +13,9 @@ let longitud_input = $("#longitud");
 let latitud = -1111;
 let longitud = -1111;
 
+
+
+
 txt_nombre.change(function () {
     nombre = $(this).val();
     nombre = nombre.toUpperCase();
