@@ -230,15 +230,12 @@ if(isset($_GET['camara'])){
             context.drawImage(video, 0, 0);
             let src = canvas.toDataURL('image/webp');
             imagen_fachada.value = src;
-            alert(imagen_fachada.value);
 
             out_image.setAttribute("src", src);
             canvas.style.display = "none";
             video.style.display = "none";
             snap.style.display = "none";
             carga_video.style.display = "none";
-
-
 
         });
 
