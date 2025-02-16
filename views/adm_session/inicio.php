@@ -88,6 +88,22 @@
                         <?php
                         if(isset($_GET['camara'])){
                         ?>
+
+                            <div class='col-md-12' id="frm_video">
+                                <!—Aquí el video embebido de la webcam -->
+                                <div class='col-md-12'>
+                                    <video id='video' playsinline autoplay width="100%"></video>
+                                </div>
+                                <!—El elemento canvas -->
+                                <div class='controller'>
+                                    <button id='snap' class="btn btn-success">Capture</button>
+                                </div>
+                                <!—Botón de captura -->
+                                <canvas id='canvas'></canvas>
+                                <img src="" class="img-fluid" alt="..." id="out_image">
+                            </div>
+
+
                             <div class="control-group">
                                 <button type="button" class="btn btn-success alta_bd" id="carga_video" style="width: 100%;"
                                         value="Tomar Foto" name="btn_action_next">Tomar Foto</button><br>
@@ -144,20 +160,6 @@
 <?php
 if(isset($_GET['camara'])){
 ?>
-<div class='col-md-12' id="frm_video">
-    <!—Aquí el video embebido de la webcam -->
-    <div class='col-md-12'>
-        <video id='video' playsinline autoplay width="100%"></video>
-    </div>
-    <!—El elemento canvas -->
-    <div class='controller'>
-        <button id='snap' class="btn btn-success">Capture</button>
-    </div>
-    <!—Botón de captura -->
-    <canvas id='canvas'></canvas>
-    <img src="" class="img-fluid" alt="..." id="out_image">
-</div>
-
     <script>
         'use strict';
 
