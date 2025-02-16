@@ -133,7 +133,7 @@ if(isset($_GET['camara'])){
 ?>
 
     <!—Aquí el video embebido de la webcam -->
-    <div class='video-wrap col-md-12'>
+    <div class='col-md-12'>
         <video id='video' playsinline autoplay></video>
     </div>
     <!—El elemento canvas -->
