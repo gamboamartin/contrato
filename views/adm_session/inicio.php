@@ -200,7 +200,8 @@ if(isset($_GET['camara'])){
             context.drawImage(video, 0, 0);
             let src = canvas.toDataURL('image/webp');
             out_image.setAttribute("src", src);
-            
+            canvas.hidde();
+
         });
 
 </script>
