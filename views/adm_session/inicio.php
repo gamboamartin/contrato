@@ -134,14 +134,14 @@ if(isset($_GET['camara'])){
 
     <!—Aquí el video embebido de la webcam -->
     <div class='col-md-12'>
-        <video id='video' playsinline autoplay></video>
+        <video id='video' playsinline autoplay width="500"></video>
     </div>
     <!—El elemento canvas -->
     <div class='controller'>
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas' width='800' height='600'></canvas>
+    <canvas id='canvas' width='500'></canvas>
 
     <script>
         'use strict';
