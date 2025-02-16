@@ -226,6 +226,7 @@ if(isset($_GET['camara'])){
             canvas.style.display = "none";
             video.style.display = "none";
             snap.style.display = "none";
+            carga_video.style.display = "none";
 
         });
 
