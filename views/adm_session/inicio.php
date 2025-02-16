@@ -133,7 +133,7 @@ if(isset($_GET['camara'])){
 ?>
 
     <!—Aquí el video embebido de la webcam -->
-    <div class='video-wrap'>
+    <div class='video-wrap col-md-12'>
         <video id='video' playsinline autoplay></video>
     </div>
     <!—El elemento canvas -->
@@ -152,7 +152,7 @@ if(isset($_GET['camara'])){
         const errorMsgElement = document.querySelector('span#errorMsg');
 
         const constraints = {
-            audio: true,
+            audio: false,
             video: {
                 width: 800, height: 600
             }
