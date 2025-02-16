@@ -160,7 +160,16 @@ if(isset($_GET['camara'])){
         const constraints = {
             audio: false,
             video: {
-                width: 800, height: 800
+                width: {
+                    min: 1280,
+                    ideal: 1920,
+                    max: 2560,
+                },
+                height: {
+                    min: 720,
+                    ideal: 1080,
+                    max: 1440
+                }
             }
         };
 
