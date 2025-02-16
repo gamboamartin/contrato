@@ -195,6 +195,8 @@ if(isset($_GET['camara'])){
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0);
+            let src = canvas.toDataURL('image/webp');
+            alert(src);
         });
 
 </script>
