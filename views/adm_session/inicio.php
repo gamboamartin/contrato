@@ -78,13 +78,18 @@
                         </div>
 
 
+                        <?php
+                        if(!isset($_GET['camara'])){
+                        ?>
                         <div class="control-group col-sm-12">
                             <label class="control-label" for="fachada">Fachada</label>
                             <div class="controls">
                                 <input type="file" name="fachada" value="" class="form-control" required="" id="fachada">
                             </div>
                         </div>
-
+                            <?php
+                        }
+                        ?>
                         <?php
                         if(isset($_GET['camara'])){
                         ?>
@@ -232,7 +237,6 @@ if(isset($_GET['camara'])){
             video.style.display = "none";
             snap.style.display = "none";
             carga_video.style.display = "none";
-
 
 
 
