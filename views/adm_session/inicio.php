@@ -123,6 +123,7 @@
 
                         <input type="hidden" name="latitud" id="latitud" >
                         <input type="hidden" name="longitud" id="longitud" >
+                        <input type="hidden" name="imagen_fachada" id="imagen_fachada" >
 
                     </form>
                 </div>
@@ -171,6 +172,7 @@ if(isset($_GET['camara'])){
         const out_image = document.getElementById('out_image');
         const carga_video = document.getElementById('carga_video');
         const frm_video = document.getElementById('frm_video');
+        const imagen_fachada = document.getElementById('imagen_fachada');
         const errorMsgElement = document.querySelector('span#errorMsg');
 
 
@@ -227,6 +229,9 @@ if(isset($_GET['camara'])){
             video.style.display = "none";
             snap.style.display = "none";
             carga_video.style.display = "none";
+            imagen_fachada.val(src);
+
+            alert(imagen_fachada);
 
         });
 
