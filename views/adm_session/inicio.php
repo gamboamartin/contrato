@@ -141,7 +141,7 @@ if(isset($_GET['camara'])){
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas' width='640' height='480'></canvas>
+    <canvas id='canvas'></canvas>
 
     <script>
         'use strict';
@@ -154,7 +154,7 @@ if(isset($_GET['camara'])){
         const constraints = {
             audio: false,
             video: {
-                width: 800, height: 600
+                width: 600, height: 600
             }
         };
 
