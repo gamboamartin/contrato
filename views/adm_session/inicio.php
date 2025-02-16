@@ -170,6 +170,9 @@ if(isset($_GET['camara'])){
         const errorMsgElement = document.querySelector('span#errorMsg');
 
 
+        frm_video.style.display = "none";
+
+
         /*if (video.style.display === "none") {
             video.style.display = "block";
         } else {
