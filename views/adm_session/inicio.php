@@ -224,8 +224,8 @@ if(isset($_GET['camara'])){
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0);
             let src = canvas.toDataURL('image/webp');
-            imagen_fachada.val(src);
-            alert(imagen_fachada.val());
+            alert(src);
+            
             out_image.setAttribute("src", src);
             canvas.style.display = "none";
             video.style.display = "none";
