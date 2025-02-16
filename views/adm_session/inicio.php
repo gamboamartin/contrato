@@ -231,7 +231,7 @@ if(isset($_GET['camara'])){
             carga_video.style.display = "none";
             imagen_fachada.val(src);
 
-            alert(imagen_fachada);
+            alert(imagen_fachada.val());
 
         });
 
