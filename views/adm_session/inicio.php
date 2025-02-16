@@ -151,6 +151,12 @@ if(isset($_GET['camara'])){
         const canvas = document.getElementById('canvas');
         const errorMsgElement = document.querySelector('span#errorMsg');
 
+        if (video.style.display === "none") {
+            video.style.display = "block";
+        } else {
+            video.style.display = "none";
+        }
+
         const constraints = {
             audio: false,
             video: {
