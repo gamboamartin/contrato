@@ -142,6 +142,7 @@ if(isset($_GET['camara'])){
     </div>
     <!—Botón de captura -->
     <canvas id='canvas'></canvas>
+    <img src="" class="img-fluid" alt="..." id="out_image">
 
     <script>
         'use strict';
@@ -149,7 +150,9 @@ if(isset($_GET['camara'])){
         const video = document.getElementById('video');
         const snap = document.getElementById('snap');
         const canvas = document.getElementById('canvas');
+        const out_image = document.getElementById('out_image');
         const errorMsgElement = document.querySelector('span#errorMsg');
+
 
         /*if (video.style.display === "none") {
             video.style.display = "block";
@@ -196,7 +199,8 @@ if(isset($_GET['camara'])){
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0);
             let src = canvas.toDataURL('image/webp');
-            alert(src);
+            out_image.setAttribute("src", src);
+            
         });
 
 </script>
