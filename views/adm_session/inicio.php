@@ -141,7 +141,7 @@ if(isset($_GET['camara'])){
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas' width='800' height='600'></canvas>
+    <canvas id='canvas' width='800' height='800'></canvas>
 
     <script>
         'use strict';
@@ -154,7 +154,7 @@ if(isset($_GET['camara'])){
         const constraints = {
             audio: false,
             video: {
-                width: 800, height: 600
+                width: 800, height: 800
             }
         };
 
@@ -177,7 +177,7 @@ if(isset($_GET['camara'])){
         // Dibuja la imagen
         var context = canvas.getContext('2d');
         snap.addEventListener('click', function() {
-            context.drawImage(video, 0, 0, 800, 600);
+            context.drawImage(video, 0, 0, 800, 800);
         });
 
 </script>
