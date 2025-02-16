@@ -141,7 +141,7 @@ if(isset($_GET['camara'])){
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas' width='100%' height='800'></canvas>
+    <canvas id='canvas' width='800' height='800'></canvas>
 
     <script>
         'use strict';
