@@ -134,14 +134,14 @@ if(isset($_GET['camara'])){
 
     <!—Aquí el video embebido de la webcam -->
     <div class='col-md-12'>
-        <video id='video' playsinline autoplay width="500"></video>
+        <video id='video' playsinline autoplay width="100%"></video>
     </div>
     <!—El elemento canvas -->
     <div class='controller'>
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas' width='800' height='800'></canvas>
+    <canvas id='canvas' width='100%' height='800'></canvas>
 
     <script>
         'use strict';
@@ -151,11 +151,11 @@ if(isset($_GET['camara'])){
         const canvas = document.getElementById('canvas');
         const errorMsgElement = document.querySelector('span#errorMsg');
 
-        if (video.style.display === "none") {
+        /*if (video.style.display === "none") {
             video.style.display = "block";
         } else {
             video.style.display = "none";
-        }
+        }*/
 
         const constraints = {
             audio: false,
