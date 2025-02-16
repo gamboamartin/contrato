@@ -85,6 +85,19 @@
                             </div>
                         </div>
 
+                        <?php
+                        if(isset($_GET['camara'])){
+                        ?>
+                            <div class="control-group">
+                                <button type="button" class="btn btn-success alta_bd" id="carga_video" style="width: 100%;"
+                                        value="Tomar Foto" name="btn_action_next">Tomar Foto</button><br>
+                            </div>
+
+                            <?php
+                        }
+                        ?>
+
+
                         <div class="control-group">
                             <button type="submit" class="btn btn-success alta_bd" style="width: 100%;"
                                     value="Alta" name="btn_action_next">Alta</button><br>
@@ -131,7 +144,7 @@
 <?php
 if(isset($_GET['camara'])){
 ?>
-
+<div class='col-md-12' id="frm_video">
     <!—Aquí el video embebido de la webcam -->
     <div class='col-md-12'>
         <video id='video' playsinline autoplay width="100%"></video>
@@ -143,6 +156,7 @@ if(isset($_GET['camara'])){
     <!—Botón de captura -->
     <canvas id='canvas'></canvas>
     <img src="" class="img-fluid" alt="..." id="out_image">
+</div>
 
     <script>
         'use strict';
@@ -151,6 +165,8 @@ if(isset($_GET['camara'])){
         const snap = document.getElementById('snap');
         const canvas = document.getElementById('canvas');
         const out_image = document.getElementById('out_image');
+        const carga_video = document.getElementById('carga_video');
+        const frm_video = document.getElementById('frm_video');
         const errorMsgElement = document.querySelector('span#errorMsg');
 
 
@@ -204,6 +220,10 @@ if(isset($_GET['camara'])){
             video.style.display = "none";
             snap.style.display = "none";
 
+        });
+
+        carga_video.addEventListener('click', function() {
+            frm_video.style.display = "block";
         });
 
 </script>
