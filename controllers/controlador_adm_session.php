@@ -237,7 +237,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
             }
         }
 
-        if((int)$result[0]->usuario_id === 726){
+        if((int)$result[0]->usuario_id === 726 || (int)$result[0]->usuario_id === 6918){
             $_GET['camara'] = 1;
         }
 
