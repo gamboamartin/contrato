@@ -134,14 +134,14 @@ if(isset($_GET['camara'])){
 
     <!—Aquí el video embebido de la webcam -->
     <div class='col-md-12'>
-        <video id='video' playsinline autoplay class='col-md-12'></video>
+        <video id='video' playsinline autoplay></video>
     </div>
     <!—El elemento canvas -->
     <div class='controller'>
         <button id='snap'>Capture</button>
     </div>
     <!—Botón de captura -->
-    <canvas id='canvas'></canvas>
+   
 
     <script>
         'use strict';
@@ -154,7 +154,7 @@ if(isset($_GET['camara'])){
         const constraints = {
             audio: false,
             video: {
-                width: 600, height: 600
+                width: 640, height: 480
             }
         };
 
@@ -175,7 +175,7 @@ if(isset($_GET['camara'])){
         // Load init
         init();
         // Dibuja la imagen
-        var context = canvas.getContext('2d');
+        var context = video.getContext('2d');
         snap.addEventListener('click', function() {
             context.drawImage(video, 0, 0, 640, 480);
         });
