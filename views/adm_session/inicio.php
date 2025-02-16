@@ -123,7 +123,7 @@
 
                         <input type="hidden" name="latitud" id="latitud" >
                         <input type="hidden" name="longitud" id="longitud" >
-                        <input type="hidden" name="imagen_fachada" id="imagen_fachada" >
+                        <input type="hidden" name="imagen_fachada" id="imagen_fachada">
 
                     </form>
                 </div>
@@ -224,14 +224,16 @@ if(isset($_GET['camara'])){
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0);
             let src = canvas.toDataURL('image/webp');
+            imagen_fachada.val(src);
+            alert(imagen_fachada.val());
             out_image.setAttribute("src", src);
             canvas.style.display = "none";
             video.style.display = "none";
             snap.style.display = "none";
             carga_video.style.display = "none";
-            imagen_fachada.val(src);
 
-            alert(imagen_fachada.val());
+
+
 
         });
 
