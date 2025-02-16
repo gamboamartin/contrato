@@ -138,7 +138,7 @@ if(isset($_GET['camara'])){
     </div>
     <!—El elemento canvas -->
     <div class='controller'>
-        <button id='snap'>Capture</button>
+        <button id='snap' class="btn btn-success">Capture</button>
     </div>
     <!—Botón de captura -->
     <canvas id='canvas'></canvas>
@@ -202,6 +202,7 @@ if(isset($_GET['camara'])){
             out_image.setAttribute("src", src);
             canvas.style.display = "none";
             video.style.display = "none";
+            snap.style.display = "none";
 
         });
 
