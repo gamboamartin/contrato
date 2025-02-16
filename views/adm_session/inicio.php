@@ -96,7 +96,9 @@
                                 </div>
                                 <!—El elemento canvas -->
                                 <div class='controller'>
-                                    <button id='snap' class="btn btn-success">Capture</button>
+                                    <button type="button" class="btn btn-danger" id="snap" style="width: 100%;"
+                                            value="Tomar Foto" name="btn_action_next">Tomar Foto</button><br>
+
                                 </div>
                                 <!—Botón de captura -->
                                 <canvas id='canvas'></canvas>
